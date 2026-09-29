@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Site Safety Inspection</title>
+
+<!-- PDF export library (only needed for the Download PDF button) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.14.0/html2pdf.bundle.min.js"></script>
+<!-- Real .docx (Word) export library (only needed for the Download Word button) -->
+<script src="https://cdn.jsdelivr.net/npm/html-docx-js@0.3.1/dist/html-docx.min.js"></script>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Small supplemental styling just for this form's Corrective Actions block
+     (style.css itself is untouched — these are new, form-specific classes) -->
+<style>
+    .corrective-actions {
+        background: #FFF3CD;
+        border-left: 4px solid #FFC300;
+        padding: 16pt;
+        margin: 24pt 0;
+    }
+    .corrective-actions h3 { color: #856404; margin-top: 0; }
+    .action-item {
+        background: #FFFFFF;
+        padding: 12pt;
+        margin-bottom: 12pt;
+        border: 1px solid #FFC300;
+    }
+    .action-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 12pt;
+        margin-top: 8pt;
+    }
+    @media screen and (max-width: 600px) {
+        .action-grid { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+
+<!-- STICKY TOOLBAR (stays visible while scrolling) -->
+<div class="toolbar">
+    <span class="toolbar-title">Daily Site Safety Inspection</span>
+    <button class="btn btn-pdf" id="downloadPdfBtn" type="button">⬇ Download PDF</button>
+    <button class="btn btn-word" id="downloadWordBtn" type="button">⬇ Download Word</button>
+    <button class="btn btn-reset" type="reset" form="printable">↺ Reset Form</button>
+</div>
+
+<!-- PRINTABLE / EXPORTABLE FORM -->
+<form id="printable">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Daily Site Safety Inspection</h1>
+        <div class="header-info">
+            <div class="info-field">
+                <span class="info-label">Site/Project Name:</span>
+                <input type="text" class="info-input" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Date:</span>
+                <input type="date" class="info-input" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Inspector Name:</span>
+                <input type="text" class="info-input" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Weather Conditions:</span>
+                <input type="text" class="info-input" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Urgent Items:</span>
+                <input type="text" class="info-input" />
+            </div>
+        </div>
+    </div>
+
+    <!-- STATUS SUMMARY -->
+    <div class="status-summary">
+        <label class="status-item">
+            <span class="radio-wrap-large">
+                <input type="radio" name="overall-status" value="Site Safe to Proceed" class="radio-hidden" />
+                <span class="radio-box-large"></span>
+            </span>
+            <span class="checkbox-label">Site Safe to Proceed</span>
+        </label>
+        <label class="status-item">
+            <span class="radio-wrap-large">
+                <input type="radio" name="overall-status" value="Issues Require Attention" class="radio-hidden" />
+                <span class="radio-box-large"></span>
+            </span>
+            <span class="checkbox-label">Issues Require Attention</span>
+        </label>
+        <label class="status-item">
+            <span class="radio-wrap-large">
+                <input type="radio" name="overall-status" value="STOP WORK Required" class="radio-hidden" />
+                <span class="radio-box-large"></span>
+            </span>
+            <span class="checkbox-label">STOP WORK Required</span>
+        </label>
+    </div>
+
+    <!-- SECTION 1: SITE ACCESS & HOUSEKEEPING -->
+    <h2>1. Site Access & Housekeeping</h2>
+    <div class="checklist-section">
+        <div class="checklist-item">
+            <div class="item-text">Entrance and exit routes are clear and accessible</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-1" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-1" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-1" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Work areas are clean and free of debris</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-2" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-2" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-2" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Materials are properly stored and stacked</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-3" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-3" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-3" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Trash and waste properly disposed in designated areas</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-4" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-4" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-4" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Walking and working surfaces are free of trip hazards</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-5" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-5" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-5" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: PERSONAL PROTECTIVE EQUIPMENT (PPE) -->
+    <h2>2. Personal Protective Equipment (PPE)</h2>
+    <div class="checklist-section">
+        <div class="checklist-item">
+            <div class="item-text">All workers wearing required hard hats</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-6" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-6" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-6" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Safety glasses/eye protection worn as required</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-7" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-7" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-7" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">High-visibility vests/clothing worn as required</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-8" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-8" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-8" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Appropriate work boots/safety footwear</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-9" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-9" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-9" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Gloves appropriate for task being performed</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-10" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-10" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-10" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Fall protection harness/lanyard (if working at heights)</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-11" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-11" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-11" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: FALL PROTECTION & WORKING AT HEIGHTS -->
+    <h2>3. Fall Protection & Working at Heights</h2>
+    <div class="checklist-section">
+        <div class="checklist-item">
+            <div class="item-text">Guardrails installed at all open edges 6 ft or higher</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-12" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-12" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-12" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Ladders secured and in good condition</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-13" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-13" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-13" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Scaffolds properly erected with toe boards and rails</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-14" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-14" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-14" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Openings and holes are covered or barricaded</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-15" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-15" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-15" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: ELECTRICAL SAFETY -->
+    <h2>4. Electrical Safety</h2>
+    <div class="checklist-section">
+        <div class="checklist-item">
+            <div class="item-text">GFCI protection in place for temporary power</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-16" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-16" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-16" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Extension cords in good condition (no cuts or damage)</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-17" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-17" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-17" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Electrical panels accessible and properly labeled</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-18" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-18" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-18" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">No exposed wiring or energized parts</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-19" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-19" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-19" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 5: TOOLS & EQUIPMENT -->
+    <h2>5. Tools & Equipment</h2>
+    <div class="checklist-section">
+        <div class="checklist-item">
+            <div class="item-text">Power tools have required guards in place</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-20" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-20" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-20" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Equipment inspected before use (visual check)</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-21" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-21" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-21" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Damaged or defective tools tagged out and removed</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-22" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-22" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-22" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-text">Heavy equipment operators are competent/certified</div>
+            <div class="checkbox-container">
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-23" value="OK" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">OK</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-23" value="Issue" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">Issue</span></label>
+                <label class="checkbox-option"><span class="radio-wrap-small"><input type="radio" name="item-23" value="N/A" class="radio-hidden" /><span class="radio-box-small"></span></span><span class="checkbox-option-label">N/A</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- ALERT BOX -->
+    <div class="alert-box">
+        <div class="alert-text">⚠ STOP WORK if any critical safety hazard is identified. Do not proceed until hazard is corrected.</div>
+    </div>
+
+    <!-- OBSERVATIONS & NOTES -->
+    <div class="notes-section">
+        <h3>Additional Observations & Notes</h3>
+        <textarea class="notes-area" placeholder="Document any observations, near misses, unsafe conditions, or other relevant information..."></textarea>
+    </div>
+
+    <!-- CORRECTIVE ACTIONS -->
+    <div class="corrective-actions">
+        <h3>⚠ Corrective Actions Required</h3>
+        <p style="font-size: 10pt; color: #856404; margin-bottom: 12pt;">List any issues identified and actions taken or required:</p>
+
+        <div class="action-item">
+            <div class="info-field">
+                <span class="info-label">Issue/Hazard Identified:</span>
+                <input type="text" class="info-input" />
+            </div>
+            <div class="action-grid">
+                <div class="info-field">
+                    <span class="info-label">Corrective Action Taken:</span>
+                    <input type="text" class="info-input" />
+                </div>
+                <div class="info-field">
+                    <span class="info-label">Responsible Person:</span>
+                    <input type="text" class="info-input" />
+                </div>
+                <div class="info-field">
+                    <span class="info-label">Target Completion:</span>
+                    <input type="date" class="info-input" />
+                </div>
+            </div>
+        </div>
+
+        <div class="action-item">
+            <div class="info-field">
+                <span class="info-label">Issue/Hazard Identified:</span>
+                <input type="text" class="info-input" />
+            </div>
+            <div class="action-grid">
+                <div class="info-field">
+                    <span class="info-label">Corrective Action Taken:</span>
+                    <input type="text" class="info-input" />
+                </div>
+                <div class="info-field">
+                    <span class="info-label">Responsible Person:</span>
+                    <input type="text" class="info-input" />
+                </div>
+                <div class="info-field">
+                    <span class="info-label">Target Completion:</span>
+                    <input type="date" class="info-input" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGNATURE SECTION -->
+    <div class="signature-section">
+        <div class="signature-box">
+            <span class="signature-label">Inspector Signature:</span>
+            <div class="signature-line"></div>
+            <div class="info-field" style="margin-top: 12pt;">
+                <span class="info-label">Print Name:</span>
+                <input type="text" class="info-input" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Date:</span>
+                <input type="date" class="info-input" />
+            </div>
+        </div>
+        <div class="signature-box">
+            <span class="signature-label">Site Supervisor Review:</span>
+            <div class="signature-line"></div>
+            <div class="info-field" style="margin-top: 12pt;">
+                <span class="info-label">Print Name:</span>
+                <input type="text" class="info-input" />
+            </div>
+            <div class="info-field">
+                <span class="info-label">Date:</span>
+                <input type="date" class="info-input" />
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="footer-grid">
+            <div>Page 1 of 1</div>
+            <div>Daily Site Safety Inspection</div>
+            <div>Version 1.0 - 2026</div>
+        </div>
+        <div style="margin-top: 8pt; font-size: 7pt;">
+            This inspection form helps document daily safety checks. It does not replace OSHA requirements or professional safety consultation.
+            Verify current OSHA standards at www.osha.gov. Reference: 29 CFR 1926 Subpart C (General Safety & Health Provisions).
+        </div>
+    </div>
+
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>
